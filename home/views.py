@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from django.conf import settings
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
@@ -15,6 +17,8 @@ def landingview(request):
 
     }
     return render(request, 'index.html', context)
+
+datetime_object = datetime.strptime("7/15/2022", "%m/%d/%Y")
 
 
 @login_required(login_url='login')
@@ -37,7 +41,7 @@ def dashboardview(request):
         document = Document.objects.filter(organisation=org, status=False)
         renewal = Renewal.objects.filter(organisation=org)
         for x in renewal:
-            if x.due_date < timezone.localdate():
+            if x.due_date < datetime_object:
                 renewal_no += 1
         invoice_no += len(invoice)
         msg_no += len(message)
@@ -461,7 +465,7 @@ def renewalsview(request, active):
     context = {
         'active': active,
         'renewal_list': renewal_list,
-        'today': timezone.localdate(),
+        'today': datetime_object,
     }
     return render(request, 'pages/renewals.html', context)
 
