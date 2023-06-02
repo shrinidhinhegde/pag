@@ -1,0 +1,40 @@
+{% extends 'dashboard.html' %}
+{% load static %}
+{% block heading %}Upload Document{% endblock %}
+{% block dashboardback %}
+    <a class="text-block-5" style="color: #006b3f;" href="{% url 'depository' %}"> &lt;Back </a>
+{% endblock %}
+{% block depo %}
+    style="color: #006b3f;"
+{% endblock %}
+{% block banner %}
+    <div class="docbanner"></div>
+{% endblock %}
+{% block dashboard %}
+    <div class="div-block-14">
+        <div class="div-block-18" style="overflow-x: auto;">
+            {% if success %}
+                <div class="w-form-done">
+                <br>
+                    <p><img width="20px" src="{% static 'images/checkmark-removebg-preview.png' %}">Document Uploaded Successfully.</p>
+                    <p>Click <a class="text-block-5" style="color: #006b3f" href="{% url 'depository' %}">here</a> to go back.</p>
+                </div>
+            {% else %}
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <p class="w-form-label">Organisation</p>
+                    <select class="text-field w-input" name="org">
+                        {% for x in options %}
+                            <option>{{ x }}</option>
+                        {% endfor %}
+                    </select>
+                    {% for y in form %}
+                        <p class="w-form-label">{{ y.label }}</p>
+                        {{ y }}
+                    {% endfor %}
+                    <button type="submit" class="submit-button-2 w-button">Upload</button>
+                </form>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

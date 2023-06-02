@@ -1,0 +1,18 @@
+{% extends 'dashboard.html' %}
+{% block heading %}Depository{% endblock %}
+{% block depo %}
+    style="color: #006b3f;"
+{% endblock %}
+{% block banner %}
+    <div class="docbanner"></div>
+{% endblock %}
+{% block dashboardback %}
+    <a class="text-block-5" style="color: #006b3f;" href="{% url 'depository' %}"> &lt;Back </a>
+{% endblock %}
+{% block dashboard %}
+    <div class="div-block-14">
+        <div class="div-block-15" style="overflow-x: auto;">
+            <embed src="{{ doc.file.url }}" type="application/pdf" width="100%" height="800px">
+        </div>
+    </div>
+{% endblock %}

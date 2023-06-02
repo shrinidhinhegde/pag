@@ -1,0 +1,45 @@
+{% extends 'dashboard.html' %}
+{% block heading %}Depository{% endblock %}
+{% block extraheading %}
+    <a href="{% url 'uploaddoc' %}" class="uploadbutton w-button">upload document</a>
+{% endblock %}
+{% block depo %}
+    style="color: #006b3f;"
+{% endblock %}
+{% block banner %}
+    <div class="docbanner"></div>
+{% endblock %}
+{% block dashboard %}
+    <div class="div-block-14">
+        <div class="div-block-18" style="overflow-x: auto;">
+                    <table>
+                        <tr class="text-block-5">
+                            <th>Mission Name</th>
+                            <th>Jurisdiction</th>
+                            <th>Type</th>
+                            <th>Created At</th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                        {% for x in document_list %}
+                            {% for y in x %}
+                                <tr class="text-block-5">
+                                    <td>{{ y.organisation }}</td>
+                                    <td>{{ y.jurisdiction }}</td>
+                                    <td>{{ y.type_of_doc }}</td>
+                                    <td>{{ y.created }}</td>
+                                    <td><a class="text-block-5" style="color: #006b3f;" href="{% url 'depositorysee' id=y.id %}">View</a></td>
+                                    <td>
+                                        <form onsubmit="return confirm('Do you really want to delete this Document?');" method="post" action="{% url 'depositorydelete' %}">
+                                            {% csrf_token %}
+                                            <input hidden="hidden" name="id" value="{{ y.id }}">
+                                            <button type="submit" class="text-block-5" style="color: #CE1225; background-color: #ffffff">Delete</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        {% endfor %}
+                    </table>
+                </div>
+    </div>
+{% endblock %}

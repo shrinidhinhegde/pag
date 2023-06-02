@@ -1,0 +1,42 @@
+{% extends 'dashboard.html' %}
+{% load static %}
+{% block heading %}Contact Information{% endblock %}
+{% block org %}
+    style="color: #006b3f;"
+{% endblock %}
+{% block dashboardback %}
+    <a class="text-block-5" style="color: #006b3f;" href="{% url 'orgdetailview' active=1 name=name %}"> &lt;Back </a>
+{% endblock %}
+{% block banner %}
+    <div class="orgbanner"></div>
+{% endblock %}
+{% block dashboard %}
+    <div class="div-block-14">
+        <div class="heading-2">{{ name }}</div>
+        <p class="text-block-5">Updating this contact info will not expose it as long as privacy us on.</p>
+        <div class="div-block-15"> <!-- style="overflow-x:auto; min-width: 400px;" -->
+            {% if msg and success %}
+                <div class="w-form-done">
+                    <p class="text-block-5"><img width="20px" src="{% static 'images/checkmark-removebg-preview.png' %}">{{ msg }}</p>
+                </div>
+                <br>
+            {% elif msg and not success %}
+                <div class="w-form-fail">
+                    <p class="text-block-5">{{ msg }}</p>
+                </div>
+                <br>
+            {% endif %}
+            <form class="form-2" method="post">
+                {% csrf_token %}
+                {% for x in form %}
+                    <p class="w-form-label">{{ x.label }}</p>
+                    {{ x }}
+                {% endfor %}
+                <div class="div-block-22xy" style="background-color: rgba(256,256,256,0)">
+                    <a href="{% url 'orgdetailview' active=1 name=name %}" style="margin-right: 10px; background-color: #ffffff; color: #6d6d6d" class="submit-button-2 w-button">CANCEL</a>
+                    <button type="submit" value="Login" class="submit-button-2 w-button">SAVE</button>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}

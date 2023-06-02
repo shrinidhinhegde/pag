@@ -1,0 +1,80 @@
+{% extends 'dashboard.html' %}
+{% block heading %}Services{% endblock %}
+{% block serv %}
+    style="color: #006b3f;"
+{% endblock %}
+{% block dashboardback %}
+    <a class="text-block-5" style="color: #006b3f;" href="{% url 'serviceview' active=2 %}"> &lt;Back </a>
+{% endblock %}
+{% block banner %}
+    <div class="servicebanner"></div>
+{% endblock %}
+{% block dashboard %}
+    <div class="div-block-14">
+          <div data-duration-in="300" data-duration-out="100" class="tabs-2 w-tabs">
+            <div class="tabs-menu-2 w-tab-menu">
+              <a data-w-tab="Tab 1" class="tab-link-tab-1-2 w-inline-block w-tab-link {% if active == 1 %}w--current{% elif active == 2 %}{% else %}w--current{% endif %}">
+                <div>Active</div>
+              </a>
+              <a data-w-tab="Tab 2" class="tab-link-tab-2-2 w-inline-block w-tab-link {% if active == 2 %}w--current{% endif %}">
+                <div>Inactive</div>
+              </a>
+            </div>
+            <div class="tabs-content-2 w-tab-content">
+              <div data-w-tab="Tab 1" class="tab-pane-tab-1-2 w-tab-pane {% if active == 1 %}w--tab-active{% elif active == 2 %}{% else %}w--tab-active{% endif %}">
+                <div class="div-block-18" style="overflow-x: auto;">
+                    <table>
+                        <tr class="text-block-5">
+                            <th>Type</th>
+                            <th>Product</th>
+                            <th>Jurisdiction</th>
+                            <th>End of Service</th>
+                            <th></th>
+                        </tr>
+                        {% for service in active_service %}
+                            <tr class="text-block-5">
+                                <td>{{ service.type_of_service }}</td>
+                                <td>{{ service.product }}</td>
+                                <td>{{ service.jurisdiction }}</td>
+                                <td>{{ service.end_of_service }}</td>
+                                <td>
+                                    <form onsubmit="return confirm('Do you really want to cancel the service?');" action="{% url 'servicecancelview' %}" method="post">
+                                        {% csrf_token %}
+                                        <input style="display: none;" name="id" value="{{ service.id }}">
+                                        <input style="display: none;" name="name" value="{{ name }}">
+                                        <button type="submit" class="text-block-5" style="color: #006b3f; background: #ffffff">Cancel Service</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+              </div>
+              <div data-w-tab="Tab 2" class="tab-pane-tab-2-2 w-tab-pane {% if active == 2 %}w--tab-active{% endif %}">
+                <div class="div-block-18">
+                    <div class="div-block-18" style="overflow-x: auto;">
+                    <table>
+                        <tr class="text-block-5">
+                            <th>Type</th>
+                            <th>Product</th>
+                            <th>Jurisdiction</th>
+                            <th>End of Service</th>
+                            <!-- <th></th> -->
+                        </tr>
+                        {% for service in inactive_service %}
+                            <tr class="w-form-fail text-block-5">
+                                <td>{{ service.type_of_service }}</td>
+                                <td>{{ service.product }}</td>
+                                <td>{{ service.jurisdiction }}</td>
+                                <td><p class="text-block-5" style="color: #CE1225"><b>CANCELLED</b></p></td>
+                                <!-- <td><a class="text-block-5" style="color: #006b3f;" href="">Activate Service</a></td> -->
+                            </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+{% endblock %}

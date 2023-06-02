@@ -1,0 +1,33 @@
+{% extends 'index.html' %}
+{% block title %}DiplomaticXpress - Login{% endblock %}
+{% block content %}
+  <div>
+    <div class="w-container">
+      <div class="div-block-9">
+        <div class="form-block w-form">
+          <form class="form-2" method="post" action="{% url 'login' %}">
+              {% csrf_token %}
+              {% if msg %}
+                  <div class="w-form-fail">
+                    <p>{{ msg }}</p>
+                  </div>
+                  <br>
+              {% endif %}
+              <p class="w-form-label">UserName</p>
+              <input type="text" class="text-field w-input" maxlength="256" name="UserName" placeholder="Username" id="UserName">
+              <p class="w-form-label">Password</p>
+              <input type="password" class="text-field w-input" maxlength="256" name="Password" placeholder="Password" id="Password" required="">
+              <a href="{% url 'reset' %}" class="link-2">Forgot Password?</a>
+              <button type="submit" value="Login" class="submit-button-2 w-button">Login</button>
+          </form>
+          <!-- <div class="w-form-done">
+            <div>Thank you! Your submission has been received!</div>
+          </div>
+          <div class="w-form-fail">
+            <div>Oops! Something went wrong while submitting the form.</div>
+          </div> -->
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock content %}

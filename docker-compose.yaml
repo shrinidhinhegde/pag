@@ -1,0 +1,31 @@
+version: '3.8'
+services:
+  app-db:
+    image: postgres:latest
+    restart: always
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - app-db-data:/var/lib/postgresql/data
+  app-web-server:
+    platform: linux/amd64
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      - app-db
+    restart: always
+    volumes:
+      - .:/server
+    ports:
+      - "8000:8000"
+    command:
+      - bash
+      - -c
+      - python manage.py migrate && python manage.py runserver 0.0.0.0:8000
+volumes:
+  app-db-data:

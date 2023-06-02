@@ -1,0 +1,16 @@
+{% extends 'index.html' %}
+{% block title %}DiplomaticXpress - Reset Password{% endblock %}
+{% block content %}
+  <div>
+    <div class="w-container">
+      <div class="div-block-9">
+        <div class="w-form-done">
+            <p>
+              Your password has been reset. You may go ahead and log in now.<br>
+              Click <a href="{% url 'login' %}">here</a> to login.
+            </p>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock content %}

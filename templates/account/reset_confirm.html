@@ -1,0 +1,18 @@
+{% extends 'index.html' %}
+{% block title %}DiplomaticXpress - Reset Password{% endblock %}
+{% block content %}
+  <div>
+    <div class="w-container">
+      <div class="div-block-9">
+        <div class="form-block w-form">
+          <form class="form-2" method="POST">
+              {% csrf_token %}
+              {{ form.new_password1 }}
+              {{ form.new_password2 }}
+              <button type="submit" class="submit-button-2 w-button">Reset Password</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock content %}

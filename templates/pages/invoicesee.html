@@ -1,0 +1,18 @@
+{% extends 'dashboard.html' %}
+{% block heading %}Invoices{% endblock %}
+{% block inv %}
+    style="color: #006b3f;"
+{% endblock %}
+{% block banner %}
+    <div class="invoicebanner"></div>
+{% endblock %}
+{% block dashboardback %}
+    <a class="text-block-5" style="color: #006b3f;" href="{% url 'invoiceview' active=1 %}"> &lt;Back </a>
+{% endblock %}
+{% block dashboard %}
+    <div class="div-block-14">
+        <div class="div-block-15" style="overflow-x: auto;">
+            <embed src="{{ invoice.file.url }}" type="application/pdf" width="100%" height="800px">
+        </div>
+    </div>
+{% endblock %}

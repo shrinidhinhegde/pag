@@ -1,0 +1,19 @@
+{% extends 'dashboard.html' %}
+{% block dash %}
+    style="color: #006b3f;"
+{% endblock %}
+{% block heading %}Dashboard{% endblock %}
+{% block dashboardback %}
+    <a class="text-block-5" style="color: #006b3f;" href="{% url 'dashboardview' %}"> &lt;Back </a>
+{% endblock %}
+{% block dashboard %}
+    <div class="div-block-14">
+        {% for notification in notifications %}
+            <div class="div-block-22">
+                <h4 class="heading-8">{{ notification.notification_title }}</h4>
+                <div class="text-block-7">{{ notification.date }}</div>
+                <div class="text-block-3" style="color: #6d6d6d">{{ notification.message }}</div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

@@ -1,0 +1,100 @@
+{% extends 'dashboard.html' %}
+{% block heading %}Services{% endblock %}
+{% block serv %}
+    style="color: #006b3f;"
+{% endblock %}
+{% block banner %}
+    <div class="servicebanner"></div>
+{% endblock %}
+{% block dashboard %}
+    <div class="div-block-14">
+          <div data-duration-in="300" data-duration-out="100" class="tabs-2 w-tabs">
+            <div class="tabs-menu-2 w-tab-menu">
+              <a data-w-tab="Tab 1" class="tab-link-tab-1-2 w-inline-block w-tab-link {% if active == 1 %}w--current{% elif active == 2 %}{% else %}w--current{% endif %}">
+                <div>Available Services</div>
+              </a>
+              <a data-w-tab="Tab 2" class="tab-link-tab-2-2 w-inline-block w-tab-link {% if active == 2 %}w--current{% endif %}">
+                <div>My Services</div>
+              </a>
+            </div>
+            <div class="tabs-content-2 w-tab-content">
+              <div data-w-tab="Tab 1" class="tab-pane-tab-1-2 w-tab-pane {% if active == 1 %}w--tab-active{% elif active == 2 %}{% else %}w--tab-active{% endif %}">
+                <div class="div-block-18">
+                  <div class="div-block-24">
+                    <div class="div-block-22x">
+                        <ul role="list" class="list-2-copy">
+                            <li><strong class="bold-text-3">Obtain stamp duty exemption(s) from Foreign Affairs Ministry/Land Commissions</strong></li>
+                        </ul>
+                        <div class="div-block-25">
+                            <div class="div-block-26">
+                              <div class="text-block-9">STATUTORY FEES</div>
+                              <h3 class="heading-9">₵50</h3>
+                              <div class="text-block-9-copy">Ghana cedi</div><a href="#" class="button w-button">REQUEST</a></div>
+                            <div class="div-block-26">
+                              <div class="text-block-9">SERVICE FEES</div>
+                              <h3 class="heading-9">₵50</h3>
+                              <div class="text-block-9-copy">Ghana cedi</div><a href="#" class="button w-button">REQUEST</a></div>
+                        </div>
+                    </div>
+                  </div>
+                  <div class="div-block-24">
+                    <div class="div-block-22x">
+                        <ul role="list" class="list-2-copy">
+                            <li><strong class="bold-text-4">Register lease with the Lands Commission</strong></li>
+                        </ul>
+                        <div class="div-block-25">
+                            <div class="div-block-26">
+                              <div class="text-block-9">STATUTORY FEES</div>
+                              <h3 class="heading-9">₵50</h3>
+                              <div class="text-block-9-copy">Ghana cedi</div><a href="#" class="button w-button">REQUEST</a></div>
+                            <div class="div-block-26">
+                              <div class="text-block-9">SERVICE FEES</div>
+                              <h3 class="heading-9">₵50</h3>
+                              <div class="text-block-9-copy">Ghana cedi</div><a href="#" class="button w-button">REQUEST</a></div>
+                        </div>
+                    </div>
+                  </div>
+                  <div class="div-block-24">
+                    <div class="div-block-22x">
+                        <ul role="list" class="list-2-copy">
+                            <li><strong class="bold-text-5">Confirm existence of local Legislative Instrument extending diplomatic privileges and immunities to properties of international organizations of the sending state.</strong></li>
+                        </ul>
+                        <div class="div-block-25">
+                            <div class="div-block-26">
+                              <div class="text-block-9">STATUTORY FEES</div>
+                              <h3 class="heading-9">₵50</h3>
+                              <div class="text-block-9-copy">Ghana cedi</div><a href="#" class="button w-button">REQUEST</a></div>
+                            <div class="div-block-26">
+                              <div class="text-block-9">SERVICE FEES</div>
+                              <h3 class="heading-9">₵50</h3>
+                              <div class="text-block-9-copy">Ghana cedi</div><a href="#" class="button w-button">REQUEST</a></div>
+                        </div>
+                    </div>
+                  </div>
+                    <div class="text-block-3">
+                        From a private landowner (including a Stool):<br><br>(a) Abstract of Title (A summary of all the documents, facts and events which show the nature of stool person's interest in the Land);<br><br>(b) Obtain copies of all documents and deeds which prove the person's title to the land such as wild, prostate, leases, insurance policies etc).
+                    </div>
+                </div>
+              </div>
+              <div data-w-tab="Tab 2" class="tab-pane-tab-2-2 w-tab-pane {% if active == 2 %}w--tab-active{% endif %}">
+                <div class="div-block-18" style="overflow-x:auto;">
+                    <table>
+                        <tr class="text-block-5">
+                            <th>Mission Name</th>
+                            <th>Services</th>
+                            <th></th>
+                        </tr>
+                        {% for org in service_list %}
+                            <tr class="text-block-5">
+                                <td>{{ org.0 }}</td>
+                                <td>{{ org.1 }}</td>
+                                <td><a class="text-block-5" style="color: #006b3f;" href="{% url 'servicedetailview' active=1 name=org.0 %}">View</a></td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+              </div>
+            </div>
+          </div>
+    </div>
+{% endblock %}

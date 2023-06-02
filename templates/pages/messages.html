@@ -1,0 +1,19 @@
+{% extends 'dashboard.html' %}
+{% block heading %}Dashboard{% endblock %}
+{% block dash %}
+    style="color: #006b3f;"
+{% endblock %}
+{% block dashboardback %}
+    <a class="text-block-5" style="color: #006b3f;" href="{% url 'dashboardview' %}"> &lt;Back </a>
+{% endblock %}
+{% block dashboard %}
+    <div class="div-block-14">
+    {% for message in messages %}
+        <div class="div-block-22">
+            <h4 class="heading-8">{{ message.organisation }}</h4>
+            <div class="text-block-7">{{ message.date }}</div>
+            <div class="text-block-3" style="color: #6d6d6d">{{ message.message }}</div>
+        </div>
+    {% endfor %}
+    </div>
+{% endblock %}

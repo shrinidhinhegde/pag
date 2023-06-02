@@ -1,0 +1,55 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block content %}
+  <div class="section-3">
+    <div class="div-block-10"></div>
+    <div class="container w-container">
+      <div style="width: 100%; height: auto">
+          <div class="div-block-18" style="overflow-x: auto; padding-bottom: 20px;">
+              <h3 class="heading-2">Documents</h3>
+              <table>
+                  <tr class="text-block-5">
+                      <th>Mission Name</th>
+                      <th>Jurisdiction</th>
+                      <th>Type</th>
+                      <th>Created At</th>
+                      <th></th>
+                  </tr>
+                  {% for y in documents %}
+                      <tr class="text-block-5">
+                          <td>{{ y.organisation }}</td>
+                          <td>{{ y.jurisdiction }}</td>
+                          <td>{{ y.type_of_doc }}</td>
+                          <td>{{ y.created }}</td>
+                          <td><a class="text-block-5" style="color: #006b3f;" href="{% url 'documentsee-sharing' id=y.id hash=hash name=name %}">View</a></td>
+                      </tr>
+                  {% endfor %}
+              </table>
+          </div>
+          <div class="div-block-18" style="overflow-x: auto; padding-bottom: 20px;">
+              <h3 class="heading-2">Invoices</h3>
+              <table>
+                  <tr class="text-block-5">
+                      <th>Mission Name</th>
+                      <th>Received</th>
+                      <th>Due</th>
+                      <th>Total</th>
+                      <th>Invoice Number</th>
+                      <th></th>
+                  </tr>
+                  {% for y in invoices %}
+                      <tr class="text-block-5">
+                          <td>{{ y.organisation }}</td>
+                          <td>{{ y.issue_date }}</td>
+                          <td>{{ y.due_date }}</td>
+                          <td>{{ y.amount }}</td>
+                          <td>{{ y.invoice_number }}</td>
+                          <td><a class="text-block-5" style="color: #006b3f;" href="{% url 'invoicesee-sharing' id=y.id hash=hash name=name %}">View</a></td>
+                      </tr>
+                  {% endfor %}
+              </table>
+          </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

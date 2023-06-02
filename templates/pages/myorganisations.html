@@ -1,0 +1,27 @@
+{% extends 'dashboard.html' %}
+{% block heading %}My Organisations{% endblock %}
+{% block org %}
+    style="color: #006b3f;"
+{% endblock %}
+{% block banner %}
+    <div class="orgbanner"></div>
+{% endblock %}
+{% block dashboard %}
+    <div class="div-block-14">
+        <h4 class="heading-6">My Missions</h4>
+        <div class="div-block-15" style="overflow-x:auto;">
+            <table>
+                <tr class="text-block-5">
+                    <th>Name</th>
+                    <th></th>
+                </tr>
+                {% for org in org_list %}
+                    <tr class="text-block-5">
+                        <td>{{ org.name_of_mission }}</td>
+                        <td><a class="text-block-5" style="color: #006b3f;" href="{% url 'orgdetailview' active=1 name=org.name_of_mission %}">View</a></td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+{% endblock %}

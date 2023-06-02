@@ -1,0 +1,95 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block content %}
+  <div class="section-3">
+    {% block banner %}
+    <div class="div-block-10"></div>
+    {% endblock %}
+    <div class="container w-container">
+      <div style="margin-top: 10px; margin-bottom: -5px;">
+      {% block dashboardback %}
+      {% endblock %}
+      </div>
+    <div class="dashheading">
+      <h2 class="heading-5">{% if s %}Dashboard{% endif %}{% block heading %}{% endblock %}</h2>
+      <div>{% block extraheading %}{% endblock %}</div>
+    </div>
+      <div class="div-block-13"></div>
+      <div class="div-block-11">
+        <div class="div-block-12">
+          <a href="{% url 'serviceview' active=1 %}" class="link-block w-inline-block">
+            <div class="text-block-5xx" {% block serv %}{% endblock %}>Services</div>
+            <div class="div-block-13"></div>
+          </a>
+          <a href="{% url 'renewalsview' active=1 %}" class="link-block w-inline-block">
+            <div class="text-block-5xx" {% block rene %}{% endblock %}>Renewables</div>
+            <div class="div-block-13"></div>
+          </a>
+          <a href="{% url 'documentview' active=1 %}" class="link-block w-inline-block">
+            <div class="text-block-5xx" {% block doc %}{% endblock %}>Documents</div>
+            <div class="div-block-13"></div>
+          </a>
+          <a href="{% url 'invoiceview' active=1 %}" class="link-block w-inline-block">
+            <div class="text-block-5xx" {% block inv %}{% endblock %}>Invoices</div>
+            <div class="div-block-13"></div>
+          </a>
+          <a href="{% url 'depository' %}" class="link-block w-inline-block">
+            <div class="text-block-5xx" {% block depo %}{% endblock %}>Depository</div>
+            <div class="div-block-13"></div>
+          </a>
+          <a href="{% url 'myorganisations' %}" class="link-block w-inline-block">
+            <div class="text-block-5xx" {% block org %}{% endblock %}>My Organisations</div>
+            <div class="div-block-13"></div>
+          </a>
+        </div>
+        {% block dashboard %}
+            <div class="div-block-14-copy-copy">
+              <div class="div-block-19">
+            <a href="{% url 'messageview' %}" style="text-decoration: none; color: #1d1d1d" class="dashbox">
+                  <div class="div-block-x"><img src="{% static 'images/icon-messages.svg' %}" width="57" alt="" class="image-2">
+                    <div class="text-block-6">Messages</div>
+                    {% if message %}<div class="text-block-9x">{{ message_no }}</div>{% endif %}
+                  </div>
+            </a>
+            <a href="{% url 'renewalsview' active=1 %}" style="text-decoration: none; color: #1d1d1d" class="dashbox">
+                  <div class="div-block-x"><img src="{% static 'images/icon-renewals.svg' %}" width="57" alt="" class="image-2">
+                    <div class="text-block-6">Renewals</div>
+                    {% if renewal %}<div class="text-block-9x">{{ renewal_no }}</div>{% endif %}
+                  </div>
+            </a>
+            <a href="{% url 'documentview' active=1 %}" style="text-decoration: none; color: #1d1d1d" class="dashbox">
+                  <div class="div-block-x"><img src="{% static 'images/icon-documents.svg' %}" width="57" alt="" class="image-2">
+                    <div class="text-block-6">Documents</div>
+                    {% if document %}<div class="text-block-9x">{{ document_no }}</div>{% endif %}
+                  </div>
+            </a>
+            <a href="{% url 'alertview' %}" style="text-decoration: none; color: #1d1d1d" class="dashbox">
+                  <div class="div-block-x"><img src="{% static 'images/icon-alert.svg' %}" width="57" alt="" class="image-2">
+                    <div class="text-block-6">Alerts</div>
+                    {% if alert %}<div class="text-block-9x">2</div>{% endif %}
+                  </div>
+            </a>
+            <a href="{% url 'invoiceview' active=1 %}" style="text-decoration: none; color: #1d1d1d" class="dashbox">
+                  <div class="div-block-x"><img src="{% static 'images/icon-invoice.svg' %}" width="57" alt="" class="image-2">
+                    <div class="text-block-6">Invoices</div>
+                    {% if invoice %}<div class="text-block-9x">{{ invoice_no }}</div>{% endif %}
+                  </div>
+            </a>
+          </div>
+              <div class="div-block-20">
+                {% for qr in qrs %}
+                  <form method="post" action="{% url 'sharingsave' %}" style="padding-bottom: 20px">
+                    {% csrf_token %}
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?data={{ qr.image }}&size=213x213" alt="QR Code" class="image" />
+                    <input style="display: none" name="organisation" value="{{ qr.organisation }}">
+                    <p class="text-block-5-copy">{{ qr.organisation }}</p>
+                    <button style="width: 100%" type="submit" class="submit-button-2 w-button">Reset</button>
+                  </form>
+                {% endfor %}
+              </div>
+            </div>
+        {% endblock %}
+      </div>
+    </div>
+  </div>
+{% endblock %}
